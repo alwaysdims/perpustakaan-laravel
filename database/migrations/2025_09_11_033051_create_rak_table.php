@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('rak', function (Blueprint $table) {
             $table->id('id');
-            $table->string('username', 50)->unique();
-            $table->string('email', 100)->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'siswa', 'petugas']);
+            $table->string('kode_rak', 20)->unique(); // contoh: A1, B2
+            $table->string('nama_rak', 100)->nullable(); // contoh: Rak Matematika
             $table->timestamps();
         });
+
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('rak');
     }
 };

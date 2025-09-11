@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('log_aktivitas', function (Blueprint $table) {
             $table->id('id');
-            $table->string('username', 50)->unique();
-            $table->string('email', 100)->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'siswa', 'petugas']);
-            $table->timestamps();
+            $table->foreignId('id_admin')->constrained('users')->onDelete('cascade');
+            $table->string('aksi', 100);
+            $table->text('deskripsi')->nullable();
+            $table->timestamp('waktu')->useCurrent();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('log_aktivitas');
     }
 };
